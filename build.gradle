@@ -1,0 +1,57 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'de.woock'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+ext {
+	springCloudVersion = 'Finchley.SR1'
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-activemq',
+	        'org.springframework.boot:spring-boot-starter-actuator',
+	        'org.springframework.boot:spring-boot-starter-freemarker',
+	        'org.springframework.boot:spring-boot-starter-web',
+	        
+	        'org.springframework.cloud:spring-cloud-starter-oauth2',
+	        'org.springframework.cloud:spring-cloud-starter-config',
+	        'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+	        'org.springframework.cloud:spring-cloud-starter-netflix-hystrix',
+	        'org.springframework.cloud:spring-cloud-starter-openfeign',
+	        'org.springframework.cloud:spring-cloud-starter-sleuth',
+	        'org.springframework.cloud:spring-cloud-starter-zipkin'
+	        
+	runtime 'org.springframework.boot:spring-boot-devtools',
+	        'com.h2database:h2'
+	        
+	compileOnly 'org.projectlombok:lombok'
+	
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

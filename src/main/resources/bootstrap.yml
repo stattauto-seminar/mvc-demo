@@ -1,0 +1,40 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: kunden
+  cloud:
+    config: 
+      uri: http://localhost:8888
+#      username: BgW
+#      password: bGW
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9090/auth/users/user-info
+      prefer-token-info: false
+
+  sleuth:
+    sampler:
+      probability: 1.0  
+
+  activemq: 
+    broker-url: "failover:tcp://localhost:61616"
+    user: admin
+    password: admin
+    packages:
+      trusted: de.woock
+          
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"     
